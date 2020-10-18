@@ -2,7 +2,7 @@
 
 ### Python学习历程
 
-专注于数据获取能力和数据清洗能力的提升
+专注于数据获取能力和数据清洗能力的提
 
 [GitHub](<https://github.com/gentleShan>)
 [Get Started](README.md)
