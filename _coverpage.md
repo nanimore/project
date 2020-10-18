@@ -1,6 +1,4 @@
-<img   width="200px" height="100%" src="https://cdn.jsdelivr.net/gh/gentleShan/gentleShan.github.io/img/avatar3.jpg">
-
-<img   width="500px" height="100%" src="https://cdn.jsdelivr.net/gh/gentleShan/gentleShan.github.io/img/1.png">
+<img   width="300px" height="100%" src="https://cdn.jsdelivr.net/gh/gentleShan/gentleShan.github.io/img/avatar3.jpg">
 
 ### Python学习历程
 
