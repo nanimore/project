@@ -1,5 +1,5 @@
 <img   width="300px" height="100%" src="https://cdn.jsdelivr.net/gh/gentleShan/gentleShan.github.io/img/avatar3.jpg">
 
 [GitHub](<https://github.com/gentleShan>)
-[Get Started](/#/Readme/README.md)
+[Get Started](README.md)
 
