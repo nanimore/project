@@ -200,7 +200,7 @@ if __name__ == "__main__":
                 # 视频网站的地址
                 you_url = 'https://www.bilibili.com/video/'+i['bv_id']
                 # 视频输出的位置
-                path = 'C:\\Users\\ZORO\\Desktop\\Bilibili'
+                path = './'
                 you_get_down(you_url,path)
                 print(i['title'])
 ```
