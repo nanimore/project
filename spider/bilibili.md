@@ -10,7 +10,7 @@
 - <img src="image-20201025220314182.png" alt="image-20201025220314182" style="zoom: 50%;" />
    
    - 设置up_mid
-  <img src="image-20201025220608005.png" alt="image-20201025220608005" style="zoom:67%;" />
+- <img src="image-20201025220608005.png" alt="image-20201025220608005" style="zoom:67%;" />
    
 2. **获取cookie**
    - 浏览器中按F12
