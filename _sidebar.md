@@ -1,1 +1,1 @@
-* [**spider**](</spider/bilibili.md)
+* [**spider**](/spider/bilibili)
