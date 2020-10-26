@@ -2,6 +2,10 @@
 
 1. 下载B站用户收藏夹中的视频
 
+   <iframe src="//player.bilibili.com/player.html?aid=712544106&bvid=BV1ED4y197LX&cid=249642338&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="100%" height="500" > </iframe>
+
+
+
 # 用法示例
 
 1. **获取up_mid**
