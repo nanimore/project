@@ -1,1 +1,1 @@
-* [**spider**](/spider/bilibili)
+* [**spider**](/spider)
