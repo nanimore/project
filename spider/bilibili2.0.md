@@ -14,7 +14,7 @@
 
 1. **获取up_mid**
 
-   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220314182.png)
+   - ![image-20201025220943424](image-20201025220314182.png)
 
    - 设置up_mid
    - ![image-20201025220943424](image-20201025220608005.png)
