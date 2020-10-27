@@ -228,13 +228,15 @@ if __name__ == "__main__":
             print(dict_BV[key])
             num = 1
             for i in value:
-                # 视频网站的地址
-                print('第' + str(num) + '个视频：' + i['title'])
-                you_url = 'https://www.bilibili.com/video/'+i['bv_id']
-                # 视频输出的位置
-                path = 'C:\\Users\\ZORO\\Desktop\\Bilibili\\'+key
-                you_get_down(you_url,path)
-                num+=1
+                try:
+                    print('第' + str(num) + '个视频：' + i['title'])
+                    you_url = 'https://www.bilibili.com/video/' + i['bv_id']
+                    # 视频输出的位置
+                    path = 'C:\\Users\\ZORO\\Desktop\\Bilibili\\' + key
+                    you_get_down(you_url, path)
+                    num += 1
+                except:
+                    pass
 
 ```
 
