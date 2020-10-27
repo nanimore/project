@@ -1,3 +1,8 @@
+# 更新内容
+
+1. Debug：解决下载已失效视频报错问题
+2. 新增：2.0支持下载多P的全部视频
+
 # 功能
 
 1. 下载B站用户收藏夹中的视频
@@ -10,40 +15,42 @@
 
 1. **获取up_mid**
 
-   - ![image-20201025220943424](image-20201025220314182.png)
+   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220314182.png)
 
    - 设置up_mid
-   - ![image-20201025220943424](image-20201025220608005.png)
+   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220608005.png)
 
 2. **获取cookie**
 
    - 浏览器中按F12
-   - ![image-20201025220943424](image-20201025220943424.png)
+   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220943424.png)
    - 设置cookie
 
 3. **获取UA**
 
-   - ![image-20201026090425706](image-20201026090425706.png)
+   - ![image-20201026090425706](M:/Projects/GitHubProject/project/spider/image-20201026090425706.png)
 
      ​	
 
    - 设置UA
 
-1. **下载**
+4. **下载**
+
    - 选择下载其中一个收藏夹的视频
-     ![image-20201025221318217](image-20201025221318217.png)
+     ![image-20201025221318217](M:/Projects/GitHubProject/project/spider/image-20201025221318217.png)
    - 下载所有收藏夹的视频
-   - ![image-20201025221357655](image-20201025221357655.png)
+   - ![image-20201025221357655](M:/Projects/GitHubProject/project/spider/image-20201025221357655.png)
    - 如果是下载自己的收藏夹，则可以删除筛选条件kv['attr'] == 22
-     ![image-20201026085232946](image-20201026085232946.png)
-2. **运行效果**
+     ![image-20201026085232946](M:/Projects/GitHubProject/project/spider/image-20201026085232946.png)
+
+5. **运行效果**
 
 
 # 代码
 
 ```python
+import re
 import sys
-
 import requests
 import json
 import you_get
@@ -52,9 +59,8 @@ dict_name = {}
 list_name = []
 dict_BV = {}
 
-UA = ''
 cookie = ''
-
+UA = ''
 def get_favorite_lsit(up_mid):
     global dict_name
     url = 'https://api.bilibili.com/x/v3/fav/folder/created/list-all?'
@@ -74,9 +80,10 @@ def get_favorite_lsit(up_mid):
     response = requests.get(url=url, params= param, headers=header)
 
     dict_ = response.json()
+    print(dict_)
     dict_name['count'] = dict_['data']['count']
     dict_name['list'] = dict_['data']['list']
-
+    print(dict_name)
 
 def get_favorite_collected(up_mid):
     pn = 1
@@ -113,8 +120,21 @@ def get_favorite_collected(up_mid):
 
         dict_ = response.json()
         dict_name['list'].extend(dict_['data']['list'])
+    print(dict_name)
+    print(len(dict_name['list']))
 
+def get_pageN(url):
+    #url = 'https://www.bilibili.com/video/BV1Fx411V7U4'
 
+    header = {
+         'user-agent': UA,
+         'cookie': cookie
+     }
+    response = requests.get(url=url,headers=header)
+    string = response.text
+    strn = re.findall('"videos"\S*?,', string)
+    n = re.sub('\D','', strn[0])
+    return int(n)
 
 def get_favorite_BV(media_id, media_count):
     list_BV = []
@@ -135,7 +155,7 @@ def get_favorite_BV(media_id, media_count):
         }
 
         header = {
-             'user-agent':UA,
+            'user-agent':UA,
             'cookie':cookie
         }
 
@@ -143,11 +163,20 @@ def get_favorite_BV(media_id, media_count):
 
         dict_js = response.json()
         for i in dict_js['data']['medias']:
-            d = {}
-            d['upper'] = i['upper']
-            d['bv_id'] = i['bv_id']
-            d['title'] = i['title']
-            list_BV.append(d)
+            #跳过已失效视频
+            if i['title']!='已失效视频':
+                d = {}
+                d['upper'] = i['upper']
+                d['bv_id'] = i['bv_id']
+                d['title'] = i['title']
+                list_BV.append(d)
+                n = get_pageN('https://www.bilibili.com/video/'+i['bv_id'])
+                for j in range(2,n+1):
+                    d2 = {}
+                    d2['upper'] = i['upper']
+                    d2['bv_id'] = i['bv_id']+'?p='+str(j)
+                    d2['title'] = i['title']
+                    list_BV.append(d2)
 
     print(len(list_BV))
     return list_BV
@@ -164,8 +193,9 @@ if __name__ == "__main__":
     #设置cookie
     cookie = ''
     #设置up_mid
-    up_mid = '409409995'
-	# 获取所有收藏夹
+    up_mid = ''
+
+    # 获取所有收藏夹
         # 获取TA的创建
     get_favorite_lsit(up_mid)
         # 获取TA的收藏
@@ -173,7 +203,6 @@ if __name__ == "__main__":
 
     #获取所有收藏夹中视频的BV号
     for kv in dict_name['list']:
-        #print(kv)
         kv_key = kv.keys()
         # 选择公开且存在的收藏夹，23为私密收藏夹，1为已删除
         #如果是下载自己的收藏夹，则可以删除筛选条件kv['attr'] == 22 and
@@ -183,22 +212,30 @@ if __name__ == "__main__":
             dict_BV[kv['title']] = get_favorite_BV(media_id, media_count)
             list_name.append({kv['title']:len(dict_BV[kv['title']])})
 
-    with open('收藏夹名称&视频数量.txt', 'w', encoding='utf-8') as fp:
-        json.dump(list_name, fp=fp, ensure_ascii=False)
-    with open('BVid.json', 'w', encoding='utf-8') as fp:
-        json.dump(dict_BV,fp=fp,ensure_ascii=False)
-
+    # with open('收藏夹名称&视频数量.txt', 'w', encoding='utf-8') as fp:
+    #     json.dump(list_name, fp=fp, ensure_ascii=False)
+    
+    #把获取BV号存入本地磁盘，下次就不用重新爬取
+    # with open('BVid.json', 'w', encoding='utf-8') as fp:
+    #     json.dump(dict_BV,fp=fp,ensure_ascii=False)
+    
+    #从本地json文件读取BV号
+    # with open('BVid.json', 'r', encoding='utf-8') as fp:
+    #     dict_BV = json.load(fp)
     #用you-get下载
-
     for key,value in dict_BV.items():
          #选择一个收藏夹
         if key == '选择一个收藏夹':
+            print(dict_BV[key])
+            num = 1
             for i in value:
                 # 视频网站的地址
+                print('第' + str(num) + '个视频：' + i['title'])
                 you_url = 'https://www.bilibili.com/video/'+i['bv_id']
                 # 视频输出的位置
-                path = './'+key
+                path = 'C:\\Users\\ZORO\\Desktop\\Bilibili\\'+key
                 you_get_down(you_url,path)
-                print(i['title'])
+                num+=1
+
 ```
 
