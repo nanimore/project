@@ -7,7 +7,7 @@
 
 1. 下载B站用户收藏夹中的视频
 
-   <iframe src="//player.bilibili.com/player.html?aid=712544106&bvid=BV1ED4y197LX&cid=249642338&page=1&high_quality=1"scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="%100" height="500" sandbox="allow-top-navigation allow-same-origin allow-forms allow-scripts" > </iframe>
+   <iframe src="//player.bilibili.com/player.html?aid=712544106&bvid=BV1ED4y197LX&cid=249642338&page=1&high_quality=1"scrolling="no" border="0" frameborder="no" width="%100" height="500" > </iframe>
 
 
 
@@ -18,17 +18,17 @@
    - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220314182.png)
 
    - 设置up_mid
-   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220608005.png)
+   - ![image-20201025220943424](image-20201025220608005.png)
 
 2. **获取cookie**
 
    - 浏览器中按F12
-   - ![image-20201025220943424](M:/Projects/GitHubProject/project/spider/image-20201025220943424.png)
+   - ![image-20201025220943424](image-20201025220943424.png)
    - 设置cookie
 
 3. **获取UA**
 
-   - ![image-20201026090425706](M:/Projects/GitHubProject/project/spider/image-20201026090425706.png)
+   - ![image-20201026090425706](image-20201026090425706.png)
 
      ​	
 
@@ -37,11 +37,11 @@
 4. **下载**
 
    - 选择下载其中一个收藏夹的视频
-     ![image-20201025221318217](M:/Projects/GitHubProject/project/spider/image-20201025221318217.png)
+     ![image-20201025221318217](image-20201025221318217.png)
    - 下载所有收藏夹的视频
-   - ![image-20201025221357655](M:/Projects/GitHubProject/project/spider/image-20201025221357655.png)
+   - ![image-20201025221357655](image-20201025221357655.png)
    - 如果是下载自己的收藏夹，则可以删除筛选条件kv['attr'] == 22
-     ![image-20201026085232946](M:/Projects/GitHubProject/project/spider/image-20201026085232946.png)
+     ![image-20201026085232946](image-20201026085232946.png)
 
 5. **运行效果**
 
