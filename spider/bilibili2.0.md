@@ -236,7 +236,7 @@ if __name__ == "__main__":
                     you_get_down(you_url, path)
                     num += 1
                 except:
-                    pass
+                    num += 1
 
 ```
 
