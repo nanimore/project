@@ -122,18 +122,6 @@ def get_favorite_collected(up_mid):
     print(dict_name)
     print(len(dict_name['list']))
 
-def get_pageN(url):
-    #url = 'https://www.bilibili.com/video/BV1Fx411V7U4'
-
-    header = {
-         'user-agent': UA,
-         'cookie': cookie
-     }
-    response = requests.get(url=url,headers=header)
-    string = response.text
-    strn = re.findall('"videos"\S*?,', string)
-    n = re.sub('\D','', strn[0])
-    return int(n)
 
 def get_favorite_BV(media_id, media_count):
     list_BV = []
@@ -169,13 +157,6 @@ def get_favorite_BV(media_id, media_count):
                 d['bv_id'] = i['bv_id']
                 d['title'] = i['title']
                 list_BV.append(d)
-                n = get_pageN('https://www.bilibili.com/video/'+i['bv_id'])
-                for j in range(2,n+1):
-                    d2 = {}
-                    d2['upper'] = i['upper']
-                    d2['bv_id'] = i['bv_id']+'?p='+str(j)
-                    d2['title'] = i['title']
-                    list_BV.append(d2)
 
     print(len(list_BV))
     return list_BV
@@ -183,7 +164,7 @@ def get_favorite_BV(media_id, media_count):
 
 
 def you_get_down(url,path):
-    sys.argv = ['you-get', '-o', path, url]
+    sys.argv = ['you-get','-l',  '-o', path, url]
     you_get.main()
 
 if __name__ == "__main__":
