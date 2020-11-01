@@ -4,4 +4,3 @@
 
 <a href="/#/spider/bilibili2.0"><button class="mybutton" style="background-color: #ea7070"><b><font color='#f4f0e6'>bilibili收藏夹下载2.0</font></b></button></a>
 
-<a href="/bilibiliDown"><button class="mybutton" style="background-color: #ea7070"><b><font color='#f4f0e6'>下载B站UP全部视频</font></b></button></a>
