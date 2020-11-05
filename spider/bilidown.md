@@ -1,4 +1,4 @@
-<iframe src="//player.bilibili.com/player.html?aid=287633760&bvid=BV1kf4y1i7Lk&cid=252624993&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"  ></iframe>
+<iframe src="//player.bilibili.com/player.html?aid=287633760&bvid=BV1kf4y1i7Lk&cid=252624993&page=1&high_quality=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" width="%100" height="500" ></iframe>
 
 
 
