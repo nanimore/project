@@ -2,7 +2,7 @@
 
 1. 下载B站用户收藏夹中的视频
 
-   <iframe src="//player.bilibili.com/player.html?aid=712544106&bvid=BV1ED4y197LX&cid=249642338&high_quality=1" width="%900" height="600" ></iframe>
+   <iframe src="//player.bilibili.com/player.html?aid=712544106&bvid=BV1ED4y197LX&cid=249642338&high_quality=1" width="900" height="600" ></iframe>
 
 # 用法示例
 
