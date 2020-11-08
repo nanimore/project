@@ -4,6 +4,7 @@
 
 ```python
 import json
+import os
 import sys
 import requests
 import you_get
@@ -25,25 +26,24 @@ class Channel_down:
             self.get_bvID(self.UA, self.up_id, i)
 
         # 把获取BV号存入本地磁盘，下次就不用重新爬获
-        with open('Channel_BVid.json', 'w', encoding='utf-8') as fp:
+        with open(path+'Channel_BVid.json', 'w', encoding='utf-8') as fp:
             json.dump(self.dict_bvID, fp=fp, ensure_ascii=False)
 
         # 从本地json文件读取BV号
-        # with open('Channel_BVid.json', 'r', encoding='utf-8') as fp:
+        # with open(path+'Channel_BVid.json', 'r', encoding='utf-8') as fp:
         #     self.dict_bvID = json.load(fp)
 
         # 用you-get下载
-        # 选择一个收藏夹
-        Channel_name = input('\n选择一个分类或all\n')
-        while (Channel_name not in self.dict_bvID.keys() and Channel_name!='all'):
-            Channel_name = input('\n选择一个分类或all\n')
+        # 选择一个频道
+        Channel_name = input('\n选择一个分类或all\n').strip().split()
+        while (not (set(Channel_name) <= set(self.dict_bvID.keys())) and Channel_name!='all'):
+            Channel_name = input('\n选择一个分类或all\n').strip().split()
         for key, value in self.dict_bvID.items():
-            # 选择一个分类
-            if key == Channel_name or Channel_name == 'all':
+            # 选择一个频道
+            if key in set(Channel_name) or Channel_name == 'all':
                 print(key, value)
                 num = 1
                 for i in value:
-                    # if i['title']=='2020年Python爬虫全套课程（学完可做项目）':
                     try:
                         print('第' + str(num) + '/' + str(len(value)) + '个视频：' + i['title'])
                         you_url = 'https://www.bilibili.com/video/' + i['bvid']
@@ -55,13 +55,8 @@ class Channel_down:
                         print('异常：',e)
                         num += 1
 
-        # print(self.list_cid)
-        # print(self.dict_bvID)
-        # {'ASMR 掏耳、捂耳朵、按摩': [{'title': '梵天采耳掏耳，竟能“舒服”的脑壳都麻了！200%舒爽体验！中间多倍高能！', 'bvid': 'BV1v7411H7zo
-
 
     def get_cid(self, UA, up_id):
-        #global list_cid
         header = {
             'user-agent': UA,
         }
@@ -81,8 +76,6 @@ class Channel_down:
             d['name'] = i['name']
             d['count'] = i['count']
             self.list_cid.append(d)
-        # print(dict_)
-        # print(self.list_cid)
 
     def get_bvID(self, UA, up_id, cid_i):
         #global dict_bvID
@@ -118,9 +111,6 @@ class Channel_down:
                 list_bvID.append(d)
         self.dict_bvID[cid_i['name']] = list_bvID
         print(cid_i['name'], len(list_bvID))
-        # print(cid_i)
-        # print(len(list_bvID))
-        # print('\n')
 
 class Classify_down:
     dict_bvID = {}
@@ -143,25 +133,24 @@ class Classify_down:
 
 
         # 把获取BV号存入本地磁盘，下次就不用重新爬获
-        with open('Classify_BVid.json', 'w', encoding='utf-8') as fp:
+        with open(path+'Classify_BVid.json', 'w', encoding='utf-8') as fp:
             json.dump(self.dict_bvID, fp=fp, ensure_ascii=False)
 
         # 从本地json文件读取BV号
-        # with open('Classify_BVid.json', 'r', encoding='utf-8') as fp:
+        # with open(path+'Classify_BVid.json', 'r', encoding='utf-8') as fp:
         #     self.dict_bvID = json.load(fp)
 
         # 用you-get下载
-        # 选择一个收藏夹
-        Classify_name = input('\n选择一个分类或all\n')
-        while (Classify_name not in self.dict_bvID.keys() and Classify_name!='all' ):
-            Classify_name = input('\n选择一个分类或all\n')
+        # 选择一个分类
+        Classify_name = input('\n选择n个分类或all\n').strip().split()
+        while(not (set(Classify_name) <= set(self.dict_bvID.keys())) and Classify_name!='all' ):
+            Classify_name = input('\n选择n个分类或all\n').strip().split()
         for key, value in self.dict_bvID.items():
             # 选择一个分类
-            if key == Classify_name or Classify_name == 'all':
+            if key in set(Classify_name) or Classify_name == 'all':
                 print(key, value)
                 num = 1
                 for i in value:
-                    # if i['title']=='2020年Python爬虫全套课程（学完可做项目）':
                     try:
                         print('第' + str(num) + '/' + str(len(value)) + '个视频：' + i['title'])
                         you_url = 'https://www.bilibili.com/video/' + i['bvid']
@@ -234,25 +223,27 @@ class Favorite_down:
                 self.dict_BV[kv['title']] = self.get_favorite_BV(media_id, media_count)
                 self.list_name.append({kv['title']: len(self.dict_BV[kv['title']])})
 
-        with open('收藏夹名称&视频数量.txt', 'w', encoding='utf-8') as fp:
-            json.dump(self.list_name, fp=fp, ensure_ascii=False)
+        with open(path+'收藏夹名称&视频数量.txt', 'w', encoding='utf-8') as fp:
+            for i in self.list_name:
+                json.dump(i, fp=fp, ensure_ascii=False)
+                fp.write('\n')
 
         # 把获取BV号存入本地磁盘，下次就不用重新爬获
-        with open('Favorite_BVid.json', 'w', encoding='utf-8') as fp:
+        with open(path+'Favorite_BVid.json', 'w', encoding='utf-8') as fp:
             json.dump(self.dict_BV, fp=fp, ensure_ascii=False)
 
         # 从本地json文件读取BV号
-        # with open('Favorite_BVid.json', 'r', encoding='utf-8') as fp:
+        # with open(path+'Favorite_BVid.json', 'r', encoding='utf-8') as fp:
         #     self.dict_BV = json.load(fp)
 
         # 用you-get下载
         # 选择一个收藏夹
-        Favorite_name = input('\n选择一个收藏夹或all\n')
-        while(Favorite_name not in self.dict_BV.keys() and Favorite_name!='all'):
-            Favorite_name = input('\n选择一个收藏夹或all\n')
+        Favorite_name = input('\n选择n个收藏夹或all\n').strip().split()
+        while(not (set(Favorite_name) <= set(self.dict_BV.keys())) and Favorite_name!='all'):
+            Favorite_name = input('\n选择n个收藏夹或all\n').strip().split()
         for key, value in self.dict_BV.items():
             # 选择一个收藏夹
-            if key == Favorite_name or Favorite_name == 'all':
+            if key in set(Favorite_name) or Favorite_name == 'all':
                 print(self.dict_BV[key])
                 num = 1
                 for i in value:
@@ -370,6 +361,12 @@ class All_down:
 
         self.get_list_bvID(self.UA, self.up_id, self.biz_id)
         self.list_bvID = list(filter(None, self.list_bvID))
+        with open(path+'All_BVid.json', 'w', encoding='utf-8') as fp:
+            json.dump(self.list_bvID, fp=fp, ensure_ascii=False)
+
+        # 从本地json文件读取BV号
+        # with open(path+'All_BVid.json', 'r', encoding='utf-8') as fp:
+        #     self.list_bvID = json.load(fp)
 
         # 下载
         l = len(self.list_bvID)
@@ -418,7 +415,10 @@ if __name__ == '__main__':
     cookie = ''
     path = './'
 
-    a = Channel_down(UA, up_id, path)         #按频道下载
+    # 创建的目录
+    if not os.path.exists(path):
+        os.makedirs(path)
+    # a = Channel_down(UA, up_id, path)         #按频道下载
     # b = Favorite_down(UA,up_id,cookie,path)   #下载收藏夹
     # c = All_down(UA, up_id, path)             #下载所有
     # d = Classify_down(UA, up_id, path)        #按分类下载
