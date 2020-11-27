@@ -229,6 +229,17 @@
 
 # 切换窗口
 
+- 打开多个网页
+
+  ```python
+  new_url = "www.baidu.com"
+  open_new_tag_command = "window.open("{}")".format(new_url) 
+  browser_chrome.execute_script(open_new_tag_command) # 执行脚本语句，在新的标签页中打开网页
+  total_handles = browser.window_handles # 获取所有标签页句柄（列表类型）
+  ```
+
+  
+
 - 循环切换每个窗口
 
   ```python
