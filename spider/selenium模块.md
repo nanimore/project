@@ -75,7 +75,7 @@
 
 - 根据 Name 定位
   - `username = driver.find_element_by_name('username')`
-  - ``password = driver.find_element_by_name('password')`
+  - `password = driver.find_element_by_name('password')`
 
 - 用链接文本定位超链接
   - `continue_link = driver.find_element_by_link_text('Continue') `
