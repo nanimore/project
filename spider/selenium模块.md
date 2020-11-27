@@ -71,24 +71,24 @@
 ```
 
 - 根据Id定位
-  `login_form = driver.find_element_by_id('loginForm')`
+  - `login_form = driver.find_element_by_id('loginForm')`
 
 - 根据 Name 定位
-  `username = driver.find_element_by_name('username')
-  password = driver.find_element_by_name('password')`
+  - `username = driver.find_element_by_name('username')`
+  - ``password = driver.find_element_by_name('password')`
 
 - 用链接文本定位超链接
-  `continue_link = driver.find_element_by_link_text('Continue') `
-  `continue_link = driver.find_element_by_partial_link_text('Conti')`
+  - `continue_link = driver.find_element_by_link_text('Continue') `
+  - `continue_link = driver.find_element_by_partial_link_text('Conti')`
 
 - 标签名定位
-  `heading1 = driver.find_element_by_tag_name('p')`
+  - `heading1 = driver.find_element_by_tag_name('p')`
 
 - class定位（定位p元素）
-  `content = driver.find_element_by_class_name('content')`
+  - `content = driver.find_element_by_class_name('content')`
 
 - css选择器定位（定位p元素）
-  `content = driver.find_element_by_css_selector('p.content')`
+  - `content = driver.find_element_by_css_selector('p.content')`
 
 # 等待
 
