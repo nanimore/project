@@ -1,8 +1,10 @@
 # selenium 模块
 
-- selenium中文文档https://python-selenium-zh.readthedocs.io/zh_CN/latest/
+
 
 # 快速上手
+
+- selenium中文文档https://python-selenium-zh.readthedocs.io/zh_CN/latest/
 
 - 示例1：
 
@@ -113,6 +115,26 @@
     ```
 
     这段代码会等待10秒，如果10秒内找到元素则立即返回，否则会抛出TimeoutException异常，WebDriverWait默认每500毫秒调用一下ExpectedCondition直到它返回成功为止。ExpectedCondition类型是布尔的，成功的返回值就是true,其他类型的ExpectedCondition成功的返回值就是 not null
+    
+  - 自动化网页操作时，有许多频繁使用到的通用条件。下面列出的是每一个条件的实现。Selenium + Python 提供了许多方便的方法，因此你不需要自己编写`expected_condition`的类，或者创建你自己的通用包。
+
+    - title_is
+    - title_contains
+    - presence_of_element_located
+    - visibility_of_element_located
+    - visibility_of
+    - presence_of_all_elements_located
+    - text_to_be_present_in_element
+    - text_to_be_present_in_element_value
+    - frame_to_be_available_and_switch_to_it
+    - invisibility_of_element_located
+    - element_to_be_clickable - 元素展示并且可用
+    - staleness_of
+    - element_to_be_selected
+    - element_located_to_be_selected
+    - element_selection_state_to_be
+    - element_located_selection_state_to_be
+    - alert_is_present
 
 - 隐式等待
 
