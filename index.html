@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/gentleShan/gentleShan.github.io/img/favicon_proj.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wfy-belief/CDN/vue.v0.7.css">
+    <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
 
 </head>
 
@@ -20,13 +21,32 @@
                 name: '学习笔记', //文档名
                 loadSidebar: true, //配置侧边栏
                 subMaxLevel: 4, //配置目录副标题级数
-                maxLevel: 3,
+                maxLevel: 6,  //默认情况下会抓取文档中所有标题渲染成目录，可配置最大支持渲染的标题层级。
                 loadNavbar: true, //配置导航栏
                 coverpage: true, //配置封面
+                autoHeader:true,//自动为每个页面增加标题
+                // coverpage: ['/', '/zh-cn/'],
+                relativePath: true,// 启用相对路径
+                mergeNavbar: true,//小屏设备下合并导航栏到侧边栏
+                formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}:{SS}',
+                notFoundPage: true,
+                //noCompileLinks: ['/foo', '/bar/.*'],//不希望 docsify 处理我们的链接
+                
+
+                //externalLinkTarget: '_self', // default: '_blank'外部链接的打开方式
+                //name: 'docsify',//文档标题，会显示在侧边栏顶部。
+                // name: '<span>docsify</span>',
+                //nameLink: '/',
+                // 按照路由切换 nameLink: {'/zh-cn/':'/zh-cn/','/': '/',  },
+                //logo: '/_media/icon.svg',
+                //auto2top: true,
+                // basePath: 'https://docsify.js.org/',
+                //homepage:'https://raw.githubusercontent.com/docsifyjs/docsify/master/README.md',
                 search: {
                     paths: 'auto',
                     placeholder: '🔍 Type to search ',
                     noData: '😞 No Results! ',
+                    hideOtherSidebarContent: false, // 是否隐藏其他侧边栏内容
                     // Headline depth, 1 - 6
                     depth: 6
                 }, //增加搜索框
