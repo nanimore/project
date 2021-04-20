@@ -14,7 +14,17 @@
   from time import sleep
   from lxml import etree
   
+  # 可选，设置无头浏览器（就是不显示窗口）
+  # chrome_options = webdriver.ChromeOptions()
+  # chrome_options.add_argument('--headless')
+  # chrome_options.add_argument('--disable-gpu')
+  
+  # 可选，设置浏览器cookies
+  # chrome_options.add_argument(r"--user-data-dir=C:\Users\ZORO\AppData\Local\Google\Chrome\User Data1")
+  
+  
   # 实例化对象  PS:需要先下载浏览器驱动http://chromedriver.storage.googleapis.com/index.html
+  # 把驱动程序放在同一文件夹 或环境变量里
   driver = webdriver.Chrome()    # Chrome浏览器
   # 发起请求，访问页面
   driver.get('https://www.allhistory.com/painting')
@@ -22,6 +32,12 @@
   sleep(1)
   # 定位到页面最下方‘知道了’按钮，并点击
   driver.find_element_by_class_name('cookie-banner-btn').click()
+  # 向下滚动3屏
+  driver.maximize_window()
+  for i in range(3):
+      driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+      sleep(3)
+  
   # 获取页面源码
   page_text = driver.page_source
   
